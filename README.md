@@ -1,6 +1,14 @@
 # A RECIPE SEARCHING APP
 
-This was created using ReactJS
+This was created using ReactJS and Redux
+
+Search for a recipe and select one to see details about it.
+
+Bookmark using the bookmark button.
+
+Be aware that this app persists data to the browser.
+
+Use developer tools > application to delete repo of bookmarks
 
 ## APIs Used
 
