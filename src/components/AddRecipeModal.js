@@ -19,6 +19,8 @@ class AddRecipeModal extends Component {
     // state = { modalOpen: this.props.modalOpen };
 
     closeModalHandler = () => {
+        if (this.props.recipe.id !== undefined)
+            window.history.pushState(null, '', `#${this.props.recipe.id}`);
         this.props.openAddRecipeModal(false);
         setTimeout(() => {
             this.props.clearAddRecipeModal();
