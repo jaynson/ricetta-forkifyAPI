@@ -22,7 +22,7 @@ class AddRecipeModal extends Component {
         this.props.openAddRecipeModal(false);
         setTimeout(() => {
             this.props.clearAddRecipeModal();
-
+            this.props.uploadError(false);
         }, 500);
 
     };
@@ -31,7 +31,6 @@ class AddRecipeModal extends Component {
         e.preventDefault();
         try {
             this.props.renderUploadSpinner(true);
-            this.props.uploadError(false);
             const dataArr = [...new FormData(this.formRef.current)];
             if (!dataArr) {
                 this.props.renderUploadSpinner(false);
