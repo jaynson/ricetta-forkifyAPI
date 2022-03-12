@@ -58,5 +58,6 @@ export const createRecipeObject = function (data) {
 };
 
 export const persistBookmarks = (bookmarkList) => {
+    localStorage.clear('bookmarks');
     localStorage.setItem('bookmarks', JSON.stringify(bookmarkList));
 };

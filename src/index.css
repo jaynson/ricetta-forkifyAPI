@@ -274,9 +274,21 @@ body {
   width: 40rem;
   background-color: #fff;
   box-shadow: 0 0.8rem 5rem 2rem rgba(97, 85, 81, 0.1);
+  max-height: 30rem;
+  overflow-x: hidden;
+  overflow-y: scroll;
   visibility: hidden;
   opacity: 0;
   transition: all 0.5s 0.2s; }
+  .bookmarks::-webkit-scrollbar {
+    width: 1rem !important; }
+  .bookmarks::-webkit-scrollbar-track {
+    background-color: #f9f5f3;
+    box-shadow: inset 0 0 5px #f2efee;
+    border-radius: 2rem; }
+  .bookmarks::-webkit-scrollbar-thumb {
+    background: linear-gradient(to bottom, #fffbf1, #fde6e4);
+    border-radius: 2rem; }
   .bookmarks__list {
     list-style: none; }
   .bookmarks__field {
