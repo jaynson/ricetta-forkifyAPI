@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { updateBookmarkList } from '../actions/addBookmarks';
 import MessageDisplay from './MessageDisplay';
+import PreviewPane from './PreviewPane';
 
 const BookmarksView = (props) => {
     console.log('BOOOKMARKSVEUUUUU', props);
@@ -21,19 +22,7 @@ const BookmarksView = (props) => {
         if (props.bookmarkList.length > 0) {
             return props.bookmarkList.map(preview => {
                 return (
-                    <li className="preview" key={ preview.id }>
-                        <a className="preview__link" href={ `#${preview.id}` }>
-                            <figure className="preview__fig">
-                                <img src={ preview.imageUrl } alt="Recipe preview" />
-                            </figure>
-                            <div className="preview__data">
-                                <h4 className="preview__name">
-                                    { preview.title }
-                                </h4>
-                                <p className="preview__author">{ preview.publisher }</p>
-                            </div>
-                        </a>
-                    </li>
+                    <PreviewPane rec={ preview } />
                 );
             });
         }

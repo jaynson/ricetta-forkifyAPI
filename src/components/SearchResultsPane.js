@@ -5,6 +5,7 @@ import { recipeError } from '../actions/renderErrors';
 import { renderRecipeSpinner } from '../actions/renderSpinners';
 import { RESULTS_PER_PAGE } from '../utility/config';
 import MessageDisplay from './MessageDisplay';
+import PreviewPane from './PreviewPane';
 import Spinner from './Spinner';
 
 class SearchResultsPane extends Component {
@@ -72,22 +73,7 @@ class SearchResultsPane extends Component {
 
         return this.props.search.result.slice(start, end).map(rec => {
             return (
-                <li className="preview" key={ rec.id }>
-                    <a className="preview__link preview__link--active" href={ `#${rec.id}` }>
-                        <figure className="preview__fig">
-                            <img src={ rec.imageUrl } alt="Test" />
-                        </figure>
-                        <div className="preview__data">
-                            <h4 className="preview__title">{ rec.title }</h4>
-                            <p className="preview__publisher">{ rec.publisher }</p>
-                            <div className={ `preview__user-generated ${rec.key ? '' : 'hidden'}` }>
-                                <svg>
-                                    <use href="icons.svg#icon-user"></use>
-                                </svg>
-                            </div>
-                        </div>
-                    </a>
-                </li>
+                <PreviewPane rec={ rec } />
             );
         });
     };
