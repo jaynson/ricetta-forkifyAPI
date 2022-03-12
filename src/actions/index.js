@@ -31,7 +31,7 @@ export const fetchRecipe = (id) => async dispatch => {
 export const fetchRecipeList = (searchTerm) => async dispatch => {
 
     try {
-        const response = await getJSON(`${API_URL}?search=${searchTerm}`);
+        const response = await getJSON(`${API_URL}?search=${searchTerm}&key=${API_KEY}`);
         if (!response ||
             (Array.isArray(response.data.recipes) &&
                 response.data.recipes.length === 0)) {
@@ -43,7 +43,8 @@ export const fetchRecipeList = (searchTerm) => async dispatch => {
                 id: rec.id,
                 title: rec.title,
                 imageUrl: rec.image_url,
-                publisher: rec.publisher
+                publisher: rec.publisher,
+                ...(rec.key && { key: rec.key })
             };
         });
 

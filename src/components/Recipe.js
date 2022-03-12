@@ -28,7 +28,10 @@ class Recipe extends Component {
             if (!this.state.bookmarked) {
                 this.props.updateBookmarkList('remove', this.props.recipe);
             } else {
-                this.props.updateBookmarkList('add', this.props.recipe);
+                if (!this.props.bookmarkList.some(
+                    rec => rec.id === this.props.recipe.id
+                ))
+                    this.props.updateBookmarkList('add', this.props.recipe);
             }
         }
         persistBookmarks(this.props.bookmarkList);
@@ -130,7 +133,7 @@ class Recipe extends Component {
                         </div>
                     </div>
 
-                    <div className="recipe__user-generated">
+                    <div className={ `recipe__user-generated ${this.props.recipe.key ? '' : 'hidden'}` }>
                         <svg>
                             <use href="icons.svg#icon-user"></use>
                         </svg>
