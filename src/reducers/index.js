@@ -29,7 +29,7 @@ const recipeErrorReducer = (errThrown = {
 const uploadErrorReducer = (errThrown = {
     isThrown: false, errText: ''
 }, action) => {
-    if (action.type === 'RECIPE_ERROR') return action.payload;
+    if (action.type === 'UPLOAD_ERROR') return action.payload;
     return errThrown;
 };
 

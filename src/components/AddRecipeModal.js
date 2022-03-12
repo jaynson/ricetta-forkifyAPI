@@ -1,6 +1,6 @@
 import React, { Component, createRef } from 'react';
 import { connect } from 'react-redux';
-import { openAddRecipeModal, uploadRecipe, createNewRecipe } from '../actions';
+import { openAddRecipeModal, uploadRecipe, createNewRecipe, clearAddRecipeModal } from '../actions';
 import { bookmarkRecipe, updateBookmarkList } from '../actions/addBookmarks';
 import { renderUploadSpinner } from '../actions/renderSpinners';
 import { uploadError } from '../actions/renderErrors';
@@ -20,6 +20,11 @@ class AddRecipeModal extends Component {
 
     closeModalHandler = () => {
         this.props.openAddRecipeModal(false);
+        setTimeout(() => {
+            this.props.clearAddRecipeModal();
+
+        }, 500);
+
     };
 
     submitFormHandler = async (e) => {
@@ -41,19 +46,9 @@ class AddRecipeModal extends Component {
             this.props.updateBookmarkList('add', this.props.recipe);
             this.props.renderUploadSpinner(false);
             persistBookmarks(this.props.bookmarkList);
-
-            //             this.props.renderRecipeSpinner(true);
-            //             const id = window.location.hash.slice(1);
-            //             if (!id) {
-            //                 this.props.renderRecipeSpinner(false);
-            //                 return;
-            //             };
-            //             this.props.recipeError(false);
-            //             await this.props.fetchRecipe(id);
-            //             this.props.renderRecipeSpinner(false);
-            // this.props.recipeError(true, "We can't find that recipe. Please try again!");
         } catch (err) {
             console.log(err);
+            this.props.renderUploadSpinner(false);
             this.props.uploadError(true, err.toString());
         }
     };
@@ -135,7 +130,7 @@ class AddRecipeModal extends Component {
     renderError = () => {
         return (
             <MessageDisplay
-                message={ 'TODO' }
+                message={ `${this.props.errThrown.errText}` }
                 iconTag='alert-triangle'
                 className='error'
             />
@@ -171,8 +166,8 @@ class AddRecipeModal extends Component {
                     {
                         (this.props.isLoading && isEmptyObject) ?
                             <Spinner /> : (!this.props.isLoading && !isEmptyObject) ?
-                                this.renderSuccess() : (this.props.errThrown && !this.props.isLoading) ?
-                                    this.renderFormElements() : this.renderError()
+                                this.renderSuccess() : (this.props.errThrown.isThrown) ?
+                                    this.renderError() : this.renderFormElements()
                     }
                 </div>
             </React.Fragment>
@@ -199,5 +194,6 @@ export default connect(mapStateToProps, {
     bookmarkRecipe,
     updateBookmarkList,
     renderUploadSpinner,
-    uploadError
+    uploadError,
+    clearAddRecipeModal
 })(AddRecipeModal);

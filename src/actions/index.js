@@ -68,6 +68,13 @@ export const openAddRecipeModal = (opened) => {
     };
 };
 
+//Action Creator for reseting add recipe modal
+export const clearAddRecipeModal = () => {
+    return {
+        type: 'CLEAR_ADD_RECIPE_MODAL',
+    };
+};
+
 //Action Creator for Adding Single Recipe
 export const uploadRecipe = (newRecipe) => async dispatch => {
 
