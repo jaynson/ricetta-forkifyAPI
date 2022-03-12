@@ -31,13 +31,13 @@ class AddRecipeModal extends Component {
         e.preventDefault();
         try {
             this.props.renderUploadSpinner(true);
+            this.props.uploadError(false);
             const dataArr = [...new FormData(this.formRef.current)];
             if (!dataArr) {
                 this.props.renderUploadSpinner(false);
                 return;
             }
             const data = Object.fromEntries(dataArr);
-            this.props.uploadError(false);
             console.log('FOOOOOOORRRRRRRRRRRRMMMMMMMMMM***********', data);
             const result = await this.props.uploadRecipe(data);
             console.log('PRIMEEEEE', this.props.uploaded);
